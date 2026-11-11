@@ -1,16 +1,21 @@
 import React from 'react';
 import ProjectCard from './components/ProjectCard';
 
+// Importing your actual project screenshots from the assets folder
+import formImg from './assets/formscard.png';
+import aiImg from './assets/airobotic.png';
+import portfolioImg from './assets/webPortfolio.png';
+
 function App() {
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '20px', fontFamily: 'sans-serif' }}>
       <h1>Dash's React Portfolio</h1>
       <p>Showcasing my transition into front-end development.</p>
 
-      {/* Project 1: Portfolio*/}
+      {/* Project 1: Portfolio */}
       <ProjectCard
         name="Multi-Page Personal Portfolio"
-        screenshot="https://via.placeholder.com/600x300?text=Portfolio"
+        screenshot={portfolioImg}
         githubRepo="https://dashtiy.github.io/thisisme/"
         techUsed={["HTML5", "CSS3", "JavaScript"]}
         writeUp="A custom multi-page portfolio tracking my coding journey and background."
@@ -20,12 +25,10 @@ function App() {
         challengesSolved="Built dynamic card rendering and synchronized audio triggers using the Web Audio API."
       />
 
-
-
       {/* Project 2: AI Robotic Neural Network */}
       <ProjectCard
         name="Futuristic AI Neural Network Ground"
-        screenshot="https://via.placeholder.com/600x300?text=AI+Robotic+Neural+Network"
+        screenshot={aiImg}
         githubRepo="https://github.com/Dashtiy/ai-robotic"
         techUsed={["HTML5", "CSS3", "JavaScript", "UI Architecture"]}
         writeUp="A simulated autonomous AI neural network command ground interface."
@@ -38,7 +41,7 @@ function App() {
       {/* Project 3: Galactic Registry Form */}
       <ProjectCard
         name="Galactic Registry - Planet Acquisition"
-        screenshot="https://via.placeholder.com/600x300?text=Galactic+Registry"
+        screenshot={formImg}
         githubRepo="https://github.com/Dashtiy/form"
         techUsed={["HTML5", "CSS3", "JavaScript", "Forms"]}
         writeUp="An immersive, futuristic world-acquisition portal and registration form."
@@ -47,7 +50,6 @@ function App() {
         role="Solo Developer"
         challengesSolved="Designed custom-styled form containers and input groups matching an immersive space-registry theme."
       />
-
 
     </div>
   );
