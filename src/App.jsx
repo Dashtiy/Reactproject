@@ -1,8 +1,8 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import About from './components/About';
-import Projects from './components/projects'; // match the exact casing of your file (projects.jsx or Projects.jsx)
-
+import Projects from './components/projects';
 function App() {
     return (
         <BrowserRouter>
