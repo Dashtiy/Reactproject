@@ -2,19 +2,18 @@ import React, { useState } from 'react';
 import ProjectCard from './ProjectCard';
 import ProjectPopup from './ProjectPopup';
 
-// Import your screenshots from src/assets
 import webPortfolioImg from '../assets/webPortfolio.png';
 import formsCardImg from '../assets/formscard.png';
 import aiRoboticImg from '../assets/airobotic.png';
 
-// Array of project objects
+// 1. MASTER LIST: All 3 projects live here
 const projectsData = [
     {
         id: 1,
         name: 'Dash Carrier & Code Portfolio',
         screenshot: webPortfolioImg,
         githubRepo: 'https://github.com/dashtiy/thisisme',
-        techUsed: 'HTML5, CSS3, Bootstrap 5, JavaScript, Vanta.js',
+        techUsed: ['HTML5', 'CSS3', 'Bootstrap 5', 'JavaScript', 'Vanta.js'],
         whatItDoes: 'A cyber-HUD personal portfolio documenting the transition from commercial heavy transport to front-end development.',
         whatILearned: 'Integrating 3D WebGL backgrounds with Vanta.js, responsive grid layouts, and custom CSS animations.',
         role: 'Solo Developer & Designer',
@@ -25,7 +24,7 @@ const projectsData = [
         name: 'Interactive Forms & Validation UI',
         screenshot: formsCardImg,
         githubRepo: 'https://github.com/dashtiy/thisisme',
-        techUsed: 'HTML5, CSS3, JavaScript',
+        techUsed: ['HTML5', 'CSS3', 'JavaScript'],
         whatItDoes: 'A responsive user registration and input validation interface with real-time feedback states.',
         whatILearned: 'Handling form events, custom styling for form controls, and clean input validation patterns.',
         role: 'Solo Developer',
@@ -36,7 +35,7 @@ const projectsData = [
         name: 'AI & Robotics Concept Showcase',
         screenshot: aiRoboticImg,
         githubRepo: 'https://github.com/dashtiy/thisisme',
-        techUsed: 'React, CSS3, Component Architecture',
+        techUsed: ['React', 'CSS3', 'Component Architecture'],
         whatItDoes: 'A modular visual showcase exploring futuristic UI layouts and reusable React card components.',
         whatILearned: 'Structuring reusable React components with props and managing UI state cleanly.',
         role: 'Solo Developer',
@@ -45,18 +44,19 @@ const projectsData = [
 ];
 
 function Projects() {
-    // Keeps your Lesson 2 preview toggle intact
     const [showProjects, setShowProjects] = useState(false);
-    // Tracks the currently clicked project object (null when popup is closed)
     const [selectedProject, setSelectedProject] = useState(null);
-    // Tracks the search input value for onChange + filter
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Filter projects based on name or tech used
-    const filteredProjects = projectsData.filter((project) =>
-        project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        project.techUsed.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // 2. THE GATEKEEPER: Keeps only projects matching the search input
+    const filteredProjects = projectsData.filter((project) => {
+        const query = searchTerm.trim().toLowerCase();
+        const matchesName = project.name.toLowerCase().includes(query);
+        const matchesTech = project.techUsed.some((tech) =>
+            tech.toLowerCase().includes(query)
+        );
+        return matchesName || matchesTech;
+    });
 
     return (
         <div style={{ padding: '20px', color: '#fff' }}>
@@ -71,7 +71,6 @@ function Projects() {
 
             {showProjects && (
                 <div>
-                    {/* onChange input to filter the projects array */}
                     <div style={{ marginBottom: '20px' }}>
                         <input
                             type="text"
@@ -90,22 +89,25 @@ function Projects() {
                         />
                     </div>
 
-                    {/* Render filtered array using .map() */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-                        {filteredProjects.map((project) => (
-                            <ProjectCard
-                                key={project.id}
-                                name={project.name}
-                                screenshot={project.screenshot}
-                                techUsed={project.techUsed}
-                                onSelectProject={() => setSelectedProject(project)}
-                            />
-                        ))}
-                    </div>
+                    {/* 3. THE BUILDER: Renders only the projects that survived the filter */}
+                    {filteredProjects.length === 0 ? (
+                        <p style={{ color: '#9ca3af' }}>No projects found matching "{searchTerm}".</p>
+                    ) : (
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+                            {filteredProjects.map((project) => (
+                                <ProjectCard
+                                    key={project.id}
+                                    name={project.name}
+                                    screenshot={project.screenshot}
+                                    techUsed={project.techUsed}
+                                    onSelectProject={() => setSelectedProject(project)}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             )}
 
-            {/* Render popup using && and spread operator (...) when a project is selected */}
             {selectedProject && (
                 <ProjectPopup
                     {...selectedProject}

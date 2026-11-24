@@ -24,13 +24,13 @@ function ProjectPopup({
                     <img src={screenshot} alt={name} className="popup-screenshot" />
                 )}
 
-                <div className="popup-details">
-                    <p><strong>Tech Used:</strong> {techUsed}</p>
-                    <p><strong>What it does:</strong> {whatItDoes}</p>
-                    <p><strong>What I learned:</strong> {whatILearned}</p>
-                    <p><strong>Role:</strong> {role}</p>
-                    <p><strong>Challenges solved:</strong> {challengesSolved}</p>
-                </div>
+<div className="popup-details">
+    <p><strong>Tech Used:</strong> {techUsed.join(', ')}</p>
+    <p><strong>What it does:</strong> {whatItDoes}</p>
+    <p><strong>What I learned:</strong> {whatILearned}</p>
+    <p><strong>Role:</strong> {role}</p>
+    <p><strong>Challenges solved:</strong> {challengesSolved}</p>
+</div>
 
                 {githubRepo && (
                     <a
