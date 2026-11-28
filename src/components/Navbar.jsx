@@ -7,8 +7,10 @@ function Navbar() {
             <Link to="/" style={{ color: '#fff', textDecoration: 'none' }}>Home</Link>
             <Link to="/about" style={{ color: '#fff', textDecoration: 'none' }}>About</Link>
             <Link to="/projects" style={{ color: '#fff', textDecoration: 'none' }}>Projects</Link>
+            <Link to="/game" style={{ color: '#fff', textDecoration: 'none' }}>Crypto Game</Link>
         </nav>
     );
 }
+
 
 export default Navbar;
